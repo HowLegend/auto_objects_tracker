@@ -13,8 +13,8 @@ input_label = "[1, 1]"  # 其中 0表示背景、1表示目标物体
 
 # 样例2：
 # name = "cat" # 视频名，后缀默认 .mp4
-# input_point = np.array([[190, 240]])
-# input_label = np.array([1])
+# input_point = "[[190, 240]]"
+# input_label = "[1]"
 ####################################################
 
 def run_script(script_name, *args):
