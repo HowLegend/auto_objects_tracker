@@ -7,7 +7,7 @@ cd auto_objects_tracker
 
 ## 环境配置
 ### 关于cuda和pytorch
-我使用的是 cuda11.8.0 和 pytorch2.1.0 ，安装包放在了 cuda_pytorch 文件夹中，具体配置教程请看 cuda_pytorch/tips.txt  
+我使用的是 cuda11.8.0 和 pytorch2.1.0 ，具体配置教程参考的是 https://blog.csdn.net/qq_46699596/article/details/134552021 
 
 使用其他版本应该也可以。  
 
