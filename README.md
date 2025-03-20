@@ -44,6 +44,14 @@ pip install imageio
 pip install imageio[ffmpeg]
 ```
 ## 运行
+为了优化 PyTorch 的 CUDA 内存分配策略，避免显存碎片化，请在根据系统类别，在终端运行
+```
+# Linux
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+# Windows
+set PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+```
+
 ### 运行示例-使用示例的视频
 在终端上运行命令
 ```
@@ -55,7 +63,7 @@ PS：若显示错误如下
 ```
 torch.OutOfMemoryError: CUDA out of memory.
 ```
-则说明“显存”不足，可以通过降低视频帧数来减小显卡内存开销。这里准备了“抽帧”脚本 [decrease_frames.py](./decrease_frame.py)。进入脚本文件后，修改文件末尾的视频名称和抽取帧数
+则说明“显存”不足，可以通过降低视频帧数来减小显卡内存开销。这里准备了“抽帧”脚本 [decrease_frames.py](./decrease_frame.py)。进入脚本文件后，修改文件末尾的视频名称和抽取帧数。
 ```
 # 输入你的视频名称
 name = "your_video_name"
@@ -63,12 +71,14 @@ name = "your_video_name"
 # 修改抽帧的情况
 frame_interval = n  # 每隔 n 帧提取一次
 ```
-然后再终端运行
+再在终端运行
 ```
 python decrease_frames.py
 ```
 抽帧后的视频会存于 data/{name}/{name}_deFrames.mp4  
-若仍然显示“显存不足”，那么加大抽帧数量，直到显存足够而不报错
+若仍然显示“显存不足”，那么加大抽帧数量，直到显存足够而不报错  
+
+⚠注意：当检测到抽帧后的文件（"data/{name}/{name}_deFrames.mp4"）存在时，默认使用的就是抽帧后的文件，而不是原视频文件（"data/videos/{name}.mp4"）。若想使用回原视频文件，请把抽帧后的文件（"data/{name}/{name}_deFrames.mp4"）删掉/更名/转移至其他位置，让程序检测不到"data/{name}/{name}_deFrames.mp4"的存在。
 
 ### 追踪 自己的视频中的自定义物体
 如果需要上传自己的视频，那么请把 .mp4视频 放在 data/videos/your_video_name.mp4 。 并且在demo中的“配置信息”处的变量name修改成

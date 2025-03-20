@@ -71,7 +71,10 @@ args = parser.parse_args()
 
 # 如果用户没有指定 video_path 和 mask_path，则使用默认值
 if args.video_path is None:
-    args.video_path = f"data/videos/{args.name}.mp4"
+    deFrames_path = f"data/{args.name}/{args.name}_deFrames.mp4"
+    default_path = f"data/videos/{args.name}.mp4"
+    args.video_path = deFrames_path if os.path.exists(deFrames_path) else default_path
+    
 if args.mask_path is None:
     args.mask_path = f"data/{args.name}/{args.name}_mask.png"
 
