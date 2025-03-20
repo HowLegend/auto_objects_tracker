@@ -51,6 +51,25 @@ python demo.py
 ```
 会在 data 目录下新建一个以视频名name为名称的文件夹 data/{name}/{name}.mp4  
 
+PS：若显示错误如下
+```
+torch.OutOfMemoryError: CUDA out of memory.
+```
+则说明“显存”不足，可以通过降低视频帧数来减小显卡内存开销。这里准备了“抽帧”脚本 [decrease_frames.py](./decrease_frame.py)。进入脚本文件后，修改文件末尾的视频名称和抽取帧数
+```
+# 输入你的视频名称
+name = "your_video_name"
+
+# 修改抽帧的情况
+frame_interval = n  # 每隔 n 帧提取一次
+```
+然后再终端运行
+```
+python decrease_frames.py
+```
+抽帧后的视频会存于 data/{name}/{name}_deFrames.mp4  
+若仍然显示“显存不足”，那么加大抽帧数量，直到显存足够而不报错
+
 ### 追踪 自己的视频中的自定义物体
 如果需要上传自己的视频，那么请把 .mp4视频 放在 data/videos/your_video_name.mp4 。 并且在demo中的“配置信息”处的变量name修改成
 ```
