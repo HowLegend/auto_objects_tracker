@@ -1,4 +1,9 @@
 # auto_objects_tracker: 连接 SAM 2 和 co-tracker3，实现自动只对视频中的选定物体提取光流
+
+## 开源项目地址
+SAM2: https://github.com/facebookresearch/sam2.git
+co-tracker3: https://github.com/facebookresearch/co-tracker
+
 ## 克隆仓库
 ```
 git clone https://github.com/HowLegend/auto_objects_tracker.git
