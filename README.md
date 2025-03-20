@@ -1,4 +1,4 @@
-# 连接 SAM 2 和 co-tracker3，实现自动只对视频中的选定物体提取光流
+# auto_objects_tracker: 连接 SAM 2 和 co-tracker3，实现自动只对视频中的选定物体提取光流
 ## 克隆仓库
 ```
 git clone https://github.com/HowLegend/auto_objects_tracker.git
@@ -10,6 +10,20 @@ cd auto_objects_tracker
 我使用的是 cuda11.8.0 和 pytorch2.1.0 ，安装包放在了 cuda_pytorch 文件夹中，具体配置教程请看 cuda_pytorch/tips.txt  
 
 使用其他版本应该也可以。  
+
+### 下载checkpoints
+```
+mkdir -p checkpoints
+cd checkpoints
+
+# checkpoint of co-tracker 
+wget https://huggingface.co/facebook/cotracker3/resolve/main/scaled_offline.pth 
+
+# checkpoint of SAM 2 
+wget https://dl.fbaipublicfiles.com/segment_anything_2/092824/sam2.1_hiera_large.pt
+
+cd ..
+```
 
 ### 安装各种依赖（Set-up）
 ```
@@ -46,5 +60,4 @@ input_label 中的每个 label 应与 input_point 每个 point(x,y) 对应，表
 input_point = "[[x_1, y_1], [x_2, y_2]]"
 input_label = "[label_1, label_2]" 
 ```
-# auto_objects_tracker
 # auto_objects_tracker
