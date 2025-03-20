@@ -43,7 +43,7 @@ def extract_frames_and_create_video(input_video_path, output_video_path, frame_i
     out.release()
 
 # 输入你的视频名称
-name = "teapot"
+name = "paragliding"
 
 folder_path = f"data/{name}" # 新建一个目录
 os.makedirs(folder_path, exist_ok=True)  # 如果目录已存在，不会抛出错误
