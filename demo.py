@@ -1,20 +1,22 @@
 import numpy as np
 import argparse
 import os
+os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'expandable_segments:True'
 import subprocess
+import torch
 ####################################################
 # 配置信息
 # 样例1：
-# 输入视频名称（存于 ./data/videos/）
-name = "paragliding" # 视频名，后缀默认 .mp4
-# 用坐标，标出你要提取的物体
-input_point = "[[640, 150], [630, 370]]"
-input_label = "[1, 1]"  # 其中 0表示背景、1表示目标物体
+# # 输入视频名称（存于 ./data/videos/）
+# name = "paragliding" # 视频名，后缀默认 .mp4
+# # 用坐标，标出你要提取的物体
+# input_point = "[[640, 150], [630, 370]]"
+# input_label = "[1, 1]"  # 其中 0表示背景、1表示目标物体
 
 # 样例2：
-# name = "cat" # 视频名，后缀默认 .mp4
-# input_point = "[[190, 240]]"
-# input_label = "[1]"
+name = "book" # 视频名，后缀默认 .mp4
+input_point = "[[750, 550]]"
+input_label = "[1]"
 ####################################################
 
 def run_script(script_name, *args):

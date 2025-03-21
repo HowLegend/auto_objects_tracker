@@ -51,7 +51,7 @@ export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 # Windows
 set PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 ```
-
+后来，我已经把这行代码嵌入到运行文件中，应该无需手动设置了。
 ### 运行示例-使用示例的视频
 在终端上运行命令
 ```
@@ -69,7 +69,8 @@ torch.OutOfMemoryError: CUDA out of memory.
 name = "your_video_name"
 
 # 修改抽帧的情况
-frame_interval = n  # 每隔 n 帧提取一次
+frame_interval = n  
+# 每隔 n 帧提取一次, 例如 15s 的视频，常常 n = 2 开始
 ```
 再在终端运行
 ```

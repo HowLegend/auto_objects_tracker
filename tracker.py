@@ -1,4 +1,5 @@
 import os
+os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'expandable_segments:True'
 import torch
 import argparse
 import numpy as np
@@ -28,22 +29,18 @@ parser.add_argument(
 # 添加其他参数
 parser.add_argument(
     "--video_path",
-    #default="data/videos/cat.mp4",
-    #default="./Mytest/videos/" + name + "_decrease_frames" + ".mp4",
     help="path to a video",
 )
 parser.add_argument(
     "--mask_path",
-    #default="data/cat/cat_mask.png",
     help="path to a segmentation mask",
 )
 parser.add_argument(
     "--checkpoint",
     default="./checkpoints/scaled_offline.pth",
-    # default=None,
     help="CoTracker model parameters",
 )
-parser.add_argument("--grid_size", type=int, default=30, help="Regular grid size")
+parser.add_argument("--grid_size", type=int, default=50, help="Regular grid size")
 parser.add_argument(
     "--grid_query_frame",
     type=int,
@@ -74,7 +71,6 @@ if args.video_path is None:
     deFrames_path = f"data/{args.name}/{args.name}_deFrames.mp4"
     default_path = f"data/videos/{args.name}.mp4"
     args.video_path = deFrames_path if os.path.exists(deFrames_path) else default_path
-    
 if args.mask_path is None:
     args.mask_path = f"data/{args.name}/{args.name}_mask.png"
 
@@ -123,7 +119,7 @@ vis.visualize(
     pred_tracks,
     pred_visibility,
     query_frame=0 if args.backward_tracking else args.grid_query_frame,
-    filename=args.name
+    filename=f"{args.name}_tracked"
 )
 
 print("End of tracking")

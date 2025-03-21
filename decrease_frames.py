@@ -43,7 +43,7 @@ def extract_frames_and_create_video(input_video_path, output_video_path, frame_i
     out.release()
 
 # 输入你的视频名称
-name = "paragliding"
+name = "book"
 
 folder_path = f"data/{name}" # 新建一个目录
 os.makedirs(folder_path, exist_ok=True)  # 如果目录已存在，不会抛出错误
@@ -53,6 +53,6 @@ output_video_path = f"data/{name}/{name}_deFrames.mp4"  # 替换为保存帧的�
 
 
 # 修改抽帧的情况
-frame_interval = 2  # 每隔 n 帧提取一次
+frame_interval = 3  # 每隔 n 帧提取一次
 
 extract_frames_and_create_video(input_video_path, output_video_path, frame_interval)
