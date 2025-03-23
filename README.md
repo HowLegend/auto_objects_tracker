@@ -63,20 +63,26 @@ PS：若显示错误如下
 ```
 torch.OutOfMemoryError: CUDA out of memory.
 ```
-则说明“显存”不足，可以通过降低视频帧数来减小显卡内存开销。这里准备了“抽帧”脚本 [decrease_frames.py](./decrease_frame.py)。进入脚本文件后，修改文件末尾的视频名称和抽取帧数。
+则说明“显存”不足，可以通过降低视频帧数来减小显卡内存开销。这里准备了“抽帧”脚本 [decrease_frames.py](./decrease_frame.py)。
+目前已将该“抽帧”函数集成进demo文件中，在demo文件的“配置信息”代码区可以看见
 ```
-# 输入你的视频名称
-name = "your_video_name"
+# “抽帧”选项
+decrease_frames = False   # 改为True，则会对视频进行抽帧
 
 # 修改抽帧的情况
-frame_interval = n  
-# 每隔 n 帧提取一次, 例如 15s 的视频，常常 n = 2 开始
+frame_interval = n  # 每隔 n 帧提取一次, 例如 15s 的视频，常常 n = 2 开始
 ```
-再在终端运行
+将“抽帧”选项打开，并设置好抽帧情况，即
 ```
-python decrease_frames.py
+decrease_frames = True  # “抽帧”选项
+frame_interval = 2   # 修改抽帧的情况/抽帧数量
+```
+再在终端重新运行
+```
+python demo.py
 ```
 抽帧后的视频会存于 data/{name}/{name}_deFrames.mp4  
+
 若仍然显示“显存不足”，那么加大抽帧数量，直到显存足够而不报错  
 
 ⚠注意：当检测到抽帧后的文件（"data/{name}/{name}_deFrames.mp4"）存在时，默认使用的就是抽帧后的文件，而不是原视频文件（"data/videos/{name}.mp4"）。若想使用回原视频文件，请把抽帧后的文件（"data/{name}/{name}_deFrames.mp4"）删掉/更名/转移至其他位置，让程序检测不到"data/{name}/{name}_deFrames.mp4"的存在。

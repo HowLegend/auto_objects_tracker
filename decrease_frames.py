@@ -1,5 +1,7 @@
 import cv2
 import os
+os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'expandable_segments:True'
+import argparse
 
 def extract_frames_and_create_video(input_video_path, output_video_path, frame_interval=1):
     """
@@ -42,8 +44,21 @@ def extract_frames_and_create_video(input_video_path, output_video_path, frame_i
     cap.release()
     out.release()
 
+parser = argparse.ArgumentParser()
+
+parser.add_argument(
+    "--name",
+)
+parser.add_argument(
+    "--frame_interval",
+    type=int,
+    default = 0,
+)
+
+args = parser.parse_args()
+
 # 输入你的视频名称
-name = "book"
+name = args.name
 
 folder_path = f"data/{name}" # 新建一个目录
 os.makedirs(folder_path, exist_ok=True)  # 如果目录已存在，不会抛出错误
@@ -53,6 +68,6 @@ output_video_path = f"data/{name}/{name}_deFrames.mp4"  # 替换为保存帧的�
 
 
 # 修改抽帧的情况
-frame_interval = 3  # 每隔 n 帧提取一次
+frame_interval = args.frame_interval  # 每隔 n 帧提取一次
 
 extract_frames_and_create_video(input_video_path, output_video_path, frame_interval)

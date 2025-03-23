@@ -16,11 +16,18 @@ parser.add_argument(
     "--name",
 )
 parser.add_argument(
+    "--input_box",
+    default=None,
+)
+parser.add_argument(
     "--input_point",
+    default=None,
 )
 parser.add_argument(
     "--input_label",
+    default=None,
 )
+args = parser.parse_args()
 
 def parse_array(array_str):
     # 使用 eval 将字符串解析为 Python 列表
@@ -28,10 +35,17 @@ def parse_array(array_str):
     # 将列表转换为 NumPy 数组
     return np.array(array_list)
 
-args = parser.parse_args()
 name=args.name
-input_point=parse_array(args.input_point)
-input_label=parse_array(args.input_label)
+if args.input_box is not None:
+    input_box=parse_array(args.input_box)
+else:
+    input_box=None
+if args.input_point is not None:
+    input_point=parse_array(args.input_point)
+    input_label=parse_array(args.input_label)
+else:
+    input_point=None
+    input_label=None
 
 ###################### 生成mask的过程 ######################
 
@@ -135,6 +149,11 @@ extract_first_frame(video_path, firstFrame_path)
 
 # 载入图片
 image = Image.open(f"data/{name}/{name}_firstFrame.png")
+
+# # 获取分辨率
+# width, height = image.size
+# print('图片分辨率：', width, 'x', height)
+
 image = np.array(image.convert("RGB"))
 
 # 使用SAM2来选择物体
@@ -150,16 +169,17 @@ predictor = SAM2ImagePredictor(sam2_model)
 
 predictor.set_image(image)
 
-# 展示 选取的对象坐标
-print("show the selected points")
-print(f"\ninput_point:\n{input_point}")
-print(f"input_label:\n{input_label}\n")
+# # 展示 选取的对象坐标
+# print("show the selected points")
+# print(f"\ninput_point:\n{input_point}")
+# print(f"input_label:\n{input_label}\n")
 
 # Predict with `SAM2ImagePredictor.predict`
 masks, scores, logits = predictor.predict(
-    point_coords=input_point,
-    point_labels=input_label,
-    multimask_output=True,
+    point_coords=input_point if input_point is not None else None,
+    point_labels=input_label if input_label is not None else None,
+    box=input_box if input_box is not None else None,
+    multimask_output=False,
 )
 sorted_ind = np.argsort(scores)[::-1]
 masks = masks[sorted_ind]
