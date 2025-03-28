@@ -13,6 +13,21 @@ cd auto_objects_tracker
 ## 环境配置
 ### 关于cuda和pytorch
 我使用的是 cuda11.8.0 和 pytorch2.1.0 ，具体配置教程参考的是 https://blog.csdn.net/qq_46699596/article/details/134552021 
+其中，对于torch2.1.0的安装，使用pytorch官网的命令
+```
+# ROCM 5.6 (Linux only)----最近一次试过这个，发现也可以
+pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/rocm5.6
+# CUDA 11.8
+pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu118
+```
+若出现Numpy兼容报错
+```
+A module that was compiled using NumPy 1.x cannot be run inNumPy 2.0.0 as it may crash
+```
+则执行命令行
+```
+pip install numpy==1.24
+```
 
 使用其他版本应该也可以。  
 
