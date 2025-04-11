@@ -15,9 +15,9 @@ cd auto_objects_tracker
 我使用的是 cuda11.8.0 和 pytorch2.1.0 ，具体配置教程参考的是 https://blog.csdn.net/qq_46699596/article/details/134552021 
 其中，对于torch2.1.0的安装，使用pytorch官网的命令
 ```
-# ROCM 5.6 (Linux only)----最近一次试过这个，发现也可以
+# ROCM 5.6 (Linux only)   ----AMD GPU
 pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/rocm5.6
-# CUDA 11.8
+# CUDA 11.8            ----NVIDIA GPU
 pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu118
 ```
 若出现Numpy兼容报错
